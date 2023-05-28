@@ -1,0 +1,94 @@
+package com.pro.blindkiosk.controller;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.pro.blindkiosk.model.Order;
+import com.pro.blindkiosk.repository.OrderRepository;
+import com.pro.blindkiosk.service.OrderService;
+
+@Controller
+public class OrderController {
+	//생성자 setter field 의존성 DI주입
+		@Autowired
+		OrderRepository or;	//OrderRepository 연동
+		
+		@Autowired
+		private OrderService os;
+		
+		//index
+		@RequestMapping(value="/index", method=RequestMethod.GET)
+		public ModelAndView index(
+				@ModelAttribute("formModel")Order order, ModelAndView mav) {
+			mav.setViewName("index");
+			mav.addObject("msg", "this is sample content");
+			Iterable<Order> list = or.findAll(); //모든 entity 자동 추출
+			mav.addObject("datalist", list);
+			return mav;
+		}
+		
+		//form
+		@RequestMapping(value="/index", method=RequestMethod.POST)
+		@Transactional(readOnly=false) //데이터베이스 처리 일관적 실행 - 변경 허용
+		public ModelAndView form( 
+				@ModelAttribute("formModel")Order order, ModelAndView mav) {
+			mav.setViewName("add");
+			or.saveAndFlush(order);	//엔터티 영구화(데이터베이스에 저장)
+			return new ModelAndView("redirect:/");
+		}
+
+		//edit
+		@RequestMapping(value="/edit", method=RequestMethod.GET)
+		public ModelAndView edit( @ModelAttribute Order order, 
+				@PathVariable int code, ModelAndView mav) {
+			mav.setViewName("edit");
+			mav.addObject("title", "edit order");
+			Order data = or.findById(code);
+			mav.addObject("formModel", data);
+			return mav;
+		}
+
+		//update 
+		@RequestMapping(value="/update", method=RequestMethod.POST)
+		@Transactional(readOnly=false) //데이터베이스 처리 일관적 실행 - 변경 허용
+		public ModelAndView update(@ModelAttribute Order order, ModelAndView mav) {
+			or.saveAndFlush(order);	//엔터티 영구화(데이터베이스에 저장)
+			return new ModelAndView("redirect:/");
+		}
+
+		//delete
+		@RequestMapping(value="/delete", method=RequestMethod.GET)
+		public ModelAndView delete( @PathVariable int code , ModelAndView mav) {
+			mav.setViewName("delete");
+			mav.addObject("title", "delete order");
+			Order data = or.findById(code);
+			mav.addObject("formModel", data);
+			return mav;
+		}
+
+		//remove 
+		@RequestMapping(value="/remove", method=RequestMethod.POST)
+		@Transactional(readOnly=false) //데이터베이스 처리 일관적 실행 - 변경 허용
+		public ModelAndView remove( @RequestParam int code, ModelAndView mav) {
+			//or.delete(order);
+			or.deleteById(code);
+			return new ModelAndView("redirect:/");
+		}
+		
+		//데이터 초기화
+		@PostConstruct
+		public void init() {
+			Order order = new Order();
+			
+		}
+	
+}

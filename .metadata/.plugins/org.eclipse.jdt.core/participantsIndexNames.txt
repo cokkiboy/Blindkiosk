@@ -1,0 +1,5 @@
+INDEX VERSION 1.131
+C:\Users\samsung\Downloads\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3093942792.index
+\Blindkiosk\src\main\java
+C:\Users\samsung\Downloads\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1083080669.index
+\Blindkiosk\src\main\java

@@ -1,0 +1,5 @@
+package com.pro.blindkiosk.controller;
+
+public class OrderController {
+
+}

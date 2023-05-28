@@ -1,0 +1,227 @@
+@charset "UTF-8";
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.header{  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 10px;
+}
+.header-title {
+  display: flex;
+  align-items: center;
+}
+.header-title h1 {
+  margin: 0;
+  text-align: center;
+}
+.voice-btn button {
+  background-color: #fbcb91;
+  color: #333333;
+  padding: 8px 20px;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+nav {
+  width: 100%;
+  background-color: #fbdb05;
+}
+
+.category {
+  display: flex;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  justify-content: center;
+  background-color: #fbdb05;
+}
+
+.category button {
+  flex-grow: 1;
+  background-color: #fbdb05;
+  border: none; /* 테두리를 없앤다 */
+  padding: 10px;
+  font-size: 1.2em; /* 원하는 글꼴 크기로 조절 */
+  text-align: center; /* 글씨를 가운데로 정렬 */
+  cursor: pointer; /* 눌릴 수 있는 요소임을 나타냄 */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.category button:hover {
+  background-color: #f0c408;
+}
+
+.category button:focus {
+  outline: none;
+  background-color: #ebba02;
+}
+
+.category-item{
+display:inline-block;
+margin:5px;
+padding:10px;
+border: solid 1px black;
+cursor: pointer;
+}
+
+.menu-item{
+display:inline-block;
+margin:5px;
+border-radius:10px;
+grid-template-columns: 200px 200px;
+grid-template-columns: 1fr 1fr;
+}
+
+.menu-item img {
+width:150px;
+height:150px;
+object-fit: cover;
+border-radius:10px;
+}
+
+.order-item{
+display:flex;
+justify-content: space-between;
+}
+
+.order-item-quantity{
+width: 10px;
+font-size:10px;
+}
+
+.order-item-price{
+color:red;
+} 
+
+#order-details {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  width:100%;
+  margin: 10px auto;
+  background-color: #f5f5f5;
+
+}
+
+#order-details-tab {
+  width:20%;
+  text-align: center;
+  padding: 12px;
+  display: inline;
+  float: left;
+}
+
+#order-details-selected-menu {
+  padding: 12px;
+  width:45%;
+  display: inline;
+  float: left;
+}
+#order-details-total{
+  padding: 12px;
+  width:15%;
+  display: inline;
+  float: left;
+  text-align: right;
+}
+#order-details-paybtn{
+  background-color: #f0c405;
+  border:none;
+  padding:12px;
+  width: 20%;
+  height:auto; 
+  float: left;
+  display: inline;
+  }
+
+#pay-btn{
+  flex-grow: 1;
+  background-color: #fbdb05;
+  border: none; /* 테두리를 없앤다 */
+  padding: 10px;
+  font-size: 1.2em; /* 원하는 글꼴 크기로 조절 */
+  text-align: center; /* 글씨를 가운데로 정렬 */
+  cursor: pointer; /* 눌릴 수 있는 요소임을 나타냄 */
+  transition: background-color 0.3s, color 0.3s;
+  display: inline-block;
+  width:100%;
+  height: 100%;
+}
+#pay-btn:hover {
+  background-color: #f0c408;
+}
+
+#pay-btn:focus {
+  outline: none;
+  background-color: #ebba02;
+}
+#order-details.open #order-details-content {
+  display: block;
+}
+
+
+#order_lsit {
+  width: 65%;
+  height: 100%;
+  background: white;
+  font-size: 12px;
+  flex-direction: column;
+}
+#order_lsit div {
+  height: 15%;
+  justify-content: space-between;
+  flex-direction: row;
+  display: inline;
+  align-items: center;
+}
+#order_lsit div div {
+  height: 65%;
+  text-align: center;
+  font-size: 10px;
+  font-weight: bolder;
+}
+[id ^= "delete"] {
+  width: 6%;
+  background: gray;
+  border-radius: 20%;
+  color: white;
+  font-weight: bolder;
+}
+[id ^= "minus"] {
+  width: 6%;
+  background: orange;
+  border-radius: 20%;
+  color: white;
+  font-weight:bolder;
+  font-size: 10px;
+}
+[id ^= "plus"] {
+  width: 6%;
+  background: orange;
+  border-radius: 20%;
+  color: white;
+  font-weight: bolder;
+  font-size: 10px;
+}
+
+
+#order_list_right {
+  width: 35%;
+  flex-direction: column;
+}
+
+.test_1 {
+  width: 200px;
+  height: 200px;
+}
