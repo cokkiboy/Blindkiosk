@@ -1,7 +1,5 @@
 package com.pro.blindkiosk.service;
 
-
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +23,7 @@ public class MenuService {
 	 }
 	 @Transactional  // 메뉴등록
 	 public void MenuSave(Menu menu) {
-        menureposiory.save(menu);
+      menureposiory.save(menu);
 	 }
 	 
 	  @Transactional  //메뉴 목록

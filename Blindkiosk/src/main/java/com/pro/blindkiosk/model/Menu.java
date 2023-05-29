@@ -3,19 +3,18 @@ package com.pro.blindkiosk.model;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import javax.persistence.Lob;
-
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 @Entity
 @Data
 @Embeddable
@@ -50,7 +49,7 @@ public class Menu {
 	   @Column(nullable=false,length=100)
 	private int calorie;
 	//찬거 뜨거운거 디저트
+	   @Enumerated(EnumType.STRING)
 	private Temp temp;
 	   
-
 }

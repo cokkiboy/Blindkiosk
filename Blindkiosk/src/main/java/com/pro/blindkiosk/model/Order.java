@@ -1,8 +1,8 @@
 package com.pro.blindkiosk.model;
 
+
+
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,16 +12,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
 import javax.persistence.Table;
 
-import org.hibernate.annotations.CreationTimestamp;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 @Data	//어노테이션을 활용하여 toString, getter, setter 등 자동완성
 @Entity
 @NoArgsConstructor  //빈생성자
@@ -54,6 +52,7 @@ public class Order {
 	@Column(nullable=false,length=100)
 	private int sum_price;	//총 가격
 	
-	@CreationTimestamp    
+
 	private Timestamp createDate;  // 이거쓴 이유 실시간으로 저장되는거 주문날짜 실시간으로  sql저장
+	//import java.sql.Timestamp; 임포트할떄 꼭이걸로하자
 }

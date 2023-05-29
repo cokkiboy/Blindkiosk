@@ -34,5 +34,3 @@ spring:
     serialization:
       fail-on-empty-beans: false
       
-      
-      

@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class ResponseDto<T> {
- int stauts;
- T data;
+	int stauts;
+	 T data;
 }
