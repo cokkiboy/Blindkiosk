@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,7 +40,7 @@ public class OrderController {
 		}
 		
 		//form
-		@RequestMapping(value="/", method=RequestMethod.POST)
+		@PostMapping({"","/"})
 		@Transactional(readOnly=false) //데이터베이스 처리 일관적 실행 - 변경 허용
 		public ModelAndView form( 
 				@ModelAttribute("formModel")Order order, ModelAndView mav) {

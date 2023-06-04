@@ -3,7 +3,9 @@ package com.pro.blindkiosk.model;
 
 
 import java.sql.Timestamp;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,7 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
+import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,7 +36,7 @@ public class Order {
 
 	
    
-	@ManyToOne( fetch=FetchType.EAGER)  //Fk 하나의 주문자가 여러 메뉴 주문가능  xxtoOne일 경우에 EAGER 타입 즉시로딩 사용
+	@ManyToOne(  fetch=FetchType.EAGER,cascade=CascadeType.REMOVE )  //Fk 하나의 주문자가 여러 메뉴 주문가능  xxtoOne일 경우에 EAGER 타입 즉시로딩 사용
 	@JoinColumn(name ="Id")  
 	 private Menu menu;
 	private int code;	//번호
@@ -52,7 +54,10 @@ public class Order {
 	@Column(nullable=false,length=100)
 	private int sum_price;	//총 가격
 	
+  //@CreationTimestamp
 
 	private Timestamp createDate;  // 이거쓴 이유 실시간으로 저장되는거 주문날짜 실시간으로  sql저장
 	//import java.sql.Timestamp; 임포트할떄 꼭이걸로하자
+	
+	//private List<Order> orderList; //List 주문내용 리스트타입 
 }

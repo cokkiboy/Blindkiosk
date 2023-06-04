@@ -7,12 +7,13 @@ let index ={
 	pay: function(){
 			//alert('user의 save함수 호출됨');
 			let data = {
+				order_details_selected_menu:$("#order-details-selected-menu").val(),
 				menu_item: $("#menu-item").val(),
 					order_list: $("#order_list").val(),
-				total_price: $("total_price").val()
+				total_price: $("#total_price").val()
 			};
 
-			console.log(data);
+	
 
 			// ajax호출시 default가 비동기 호출
 			// ajax 통신을 이용해서 3개의 데이터를 json으로 변경하여 insert 요청!!
@@ -33,7 +34,7 @@ let index ={
 					location.href="/";
 				}
 				
-				//console.log(resp);
+				console.log(resp);
 				
 			}).fail(function(error){
 				alert(JSON.stringify(error));
@@ -41,3 +42,4 @@ let index ={
 }
 
 }
+

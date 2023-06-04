@@ -106,11 +106,11 @@
         </div>
         <div id="order-details-paybtn">
             <button id="pay-btn" >결제하기</button>
-            <script src="../js/order.js" defer></script>
+            
         </div>
         <div id="toast">결제되셨습니다!</div>
     </aside>
-    
-    <script src="../js/main.js" defer></script>
+    <script src="../js/order.js" ></script>
+    <script src="../js/main.js" ></script>
 </body>
 </html>

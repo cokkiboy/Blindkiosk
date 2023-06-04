@@ -228,3 +228,34 @@ const toast = document.getElementById('toast');  // id가 toast인 요소 div
   isToastShown = false;
   }, 2700);
   });
+  
+  /*function convertOrderListToJson(order_list) {
+    let jsonOrderList = [];
+    for (let i = 0; i < order_list.length; i++) {
+        jsonOrderList.push({
+            title: order_list[i].title,
+            sum_price: order_list[i].number,
+            price: order_list[i].price,
+        });
+    }
+    return JSON.stringify({ "order_list": jsonOrderList });
+}
+function sendOrderData() {
+    var jsonOrderData = convertOrderListToJson(order_list);
+
+    fetch('/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: jsonOrderData
+    })
+    .then(response => {
+        if (response.ok) {
+            // 성공적으로 주문 데이터를 전송함
+        } else {
+            // 주문 데이터 전송에 실패함
+        }
+    })
+}
+*/
