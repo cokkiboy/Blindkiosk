@@ -6,20 +6,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BlindCoffee</title>
+     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
     <header class="header">
         <div class="header-title">
-            <h1>BlindCoffee</h1>
+            <h1> BlindCoffee </h1>
         </div>
         <div class="voice-btn">
-            <button>말해주고<br />들어줘요</button>
+            <button>Text to Speech</button>
+            <button>Speech To Text</button>
         </div>
     </header>
     <nav>
         <div class="category">
+       
           <button title="hot-coffee" onclick="open_menu_table(this.title)">따뜻한 커피(HOT Coffee)</button>
+          
           <button title="iced-coffee" onclick="open_menu_table(this.title)">차가운 커피(ICE Coffee)</button>
           <button title="hot-tea" onclick="open_menu_table(this.title)">따뜻한 차(HOT TEA)</button>
           <button title="iced-tea" onclick="open_menu_table(this.title)">차가운 차(ICE TEA)</button>
@@ -82,49 +86,28 @@
                     <div id="첨벙첨벙간식꾸러미" title="no_option" data-price="2200" onclick="option(this.id, this.title, this.dataset.price)"><img src="../images/dessert/summerkrstdessertpack.jpg" alt="첨벙첨벙간식꾸러미"><!-- 금액 + 이름 추가 예정--></div>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
 
    <!-- 하단바 -->
     <aside id="order-details">
         <div id="order-details-tab">
-            <h2>고른 메뉴</h2>
+            <h2>Cart</h2>
         </div>
-
         <div id="order-details-selected-menu">
             <div id="order_list">
-                <div id="order_1" class="cart">
-                    <div id="delete_1" onclick="hideCart(this);">X</div>
-                    <div id="range_1"></div>
-                    <div id="minus_1">ㅡ</div>
-                    <div id="amount_1"></div>
-                    <div id="plus_1">╋</div>
-                    <div id="item_price_1"></div>
-                </div>
-                <div id="order_2" class="cart">
-                    <div id="delete_2" onclick="hideCart(this);">X</div>
-                    <div id="range_2"></div>
-                    <div id="minus_2">ㅡ</div>
-                    <div id="amount_2"></div>
-                    <div id="plus_2">╋</div>
-                    <div id="item_price_2"></div>
-                </div>
-                <div id="order_3" class="cart">
-                    <div id="delete_3" onclick="hideCart(this);">X</div>
-                    <div id="range_3"></div>
-                    <div id="minus_3">ㅡ</div>
-                    <div id="amount_3"></div>
-                    <div id="plus_3">╋</div>
-                    <div id="item_price_3"></div>
-                </div>
+                <div id="cartContainer">
+  					<!-- 자바스크립트는 여기에 동적으로 cart를 추가합니다 -->
+				</div>
+        	</div>
         </div>
-
         <div id="total_price">
-            <h3>총 가격: 0원</h3>
+            <h3>Total Price: 0원</h3>
         </div>
         <div id="order-details-paybtn">
             <button id="pay-btn" onclick="">결제하기</button>
         </div>
+        <div id="toast">결제되셨습니다!</div>
     </aside>
     <script src="../js/main.js" defer></script>
 </body>

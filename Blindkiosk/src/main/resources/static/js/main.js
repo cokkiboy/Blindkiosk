@@ -1,7 +1,3 @@
-
-
-
-
 // 카테고리 및 메뉴 데이터
 //const categories = [...] // 이곳에 스프링 프레임워크로부터 전달받은 카테고리 데이터를 넣습니다.
 /*const menu = [
@@ -27,6 +23,7 @@
     { name: "베이컨샌드위치", price: 5000 },
   ] 
 ]*/
+
 function open_menu_table(id) {
   all_menu_none();
   document.getElementById(id).style.display = 'block';
@@ -73,8 +70,6 @@ const orderDetailsTab = document.getElementById("order-details-tab");
 orderDetailsTab.addEventListener("click", () => {
   orderDetails.classList.toggle("open");
 });
-
-
 function Item(name, price) {
   this.name = name;
   this.number = 0;
@@ -90,14 +85,15 @@ function option(id, type, price) {
   var order = new Item(id, price);
   order.number += 1;
 
-  var cnt = 0;
+  var duplicate = false;
   for (i = 0; i < order_list.length; i++) {
       if (order.name == order_list[i].name) {
           order_list[i].number += 1;
-          cnt += 1;
+          duplicate = true;
       }
   }
-  if (cnt == 0 || order_list.length == 0) {
+  
+  if (!duplicate) {
       order_list.push(order);
   }
   
@@ -107,55 +103,128 @@ function option(id, type, price) {
       /**/
   }
 }
+var numOfCarts = 5;
 
+function createCartElement(cartNumber) {
+  var cart = document.createElement('div');
+  cart.id = 'order_' + cartNumber;
+  cart.className = 'cart';
 
+  var deleteBtn = document.createElement('div');
+  deleteBtn.id = 'delete_' + cartNumber;
+  deleteBtn.onclick = function () {
+    resetItem(cartNumber - 1);
+  };
+  deleteBtn.innerText = 'X';
+  cart.appendChild(deleteBtn);
 
-function delete_item(index) {
-  order_list = order_list.splice(index, 1);
-  open_order_list(order_list);
+  var range = document.createElement('div');
+  range.id = 'range_' + cartNumber;
+  cart.appendChild(range);
+
+  var minusBtn = document.createElement('div');
+  minusBtn.id = 'minus_' + cartNumber;
+  minusBtn.onclick = function () {
+    minus(cartNumber - 1);
+  };
+  minusBtn.innerText = 'ㅡ';
+  cart.appendChild(minusBtn);
+
+  var amount = document.createElement('div');
+  amount.id = 'amount_' + cartNumber;
+  cart.appendChild(amount);
+
+  var plusBtn = document.createElement('div');
+  plusBtn.id = 'plus_' + cartNumber;
+  plusBtn.onclick = function () {
+    plus(cartNumber - 1);
+  };
+  plusBtn.innerText = '╋';
+  cart.appendChild(plusBtn);
+
+  var itemPrice = document.createElement('div');
+  itemPrice.id = 'item_price_' + cartNumber;
+  cart.appendChild(itemPrice);
+
+  cart.style.display = 'none';
+
+  return cart;
 }
 
+function generateCarts(numOfCarts) {
+  var container = document.getElementById('cartContainer');
+  
+  for (var i = 1; i <= numOfCarts; i++) {
+    var cartElement = createCartElement(i);
+    container.appendChild(cartElement);
+  }
+}
 
-/*order_list에 표시하기*/
 var total_list= [0, 0];
+
 function open_order_list(order_list) {
   var total_num = 0;
   var total_price = 0;
 
-  for (i = 0; i < order_list.length; i++) {
-      var order_id = "order_" + (i + 1);
-      document.getElementById(order_id).style.display = 'flex';
-
-      document.getElementById("range_" + (i + 1)).innerText = (i + 1) + ". " + (order_list[i].name);
-      document.getElementById("amount_" + (i + 1)).innerText = (order_list[i].number) + "개";
-      document.getElementById("item_price_" + (i + 1)).innerText = (order_list[i].price) * (order_list[i].number) + "원";
-      
-      total_num += order_list[i].number;
-      total_price += (order_list[i].price)*(order_list[i].number);
+  // 모든 아이템 숨기기
+  for (var j = 1; j <= numOfCarts; j++) {
+    document.getElementById("order_" + j).style.display = 'none';
   }
-  document.getElementById("total_price").innerHTML = "총 가격: " + (total_price)+"원";
+
+  for (i = 0; i < order_list.length; i++) {
+    var order_id = "order_" + (i + 1);
+    document.getElementById(order_id).style.display = 'flex';
+
+    document.getElementById("range_" + (i + 1)).innerText = (i + 1) + ". " + (order_list[i].name);
+    document.getElementById("amount_" + (i + 1)).innerText = (order_list[i].number) + "개";
+    document.getElementById("minus_" + (i + 1)).setAttribute("onclick", "minus(" + i + ")");
+    document.getElementById("plus_" + (i + 1)).setAttribute("onclick", "plus(" + i + ")");
+    document.getElementById("delete_" + (i + 1)).setAttribute("onclick", "resetItem(" + i + ")");
+    
+    total_num += order_list[i].number;
+    total_price += order_list[i].price * order_list[i].number;
+  }
+  document.getElementById("total_price").innerHTML = "총 가격: " + total_price + "원";
   total_list[0] = total_num;
   total_list[1] = total_price;
-
 }
 
+function minus(i) {
+  if (order_list[i].number > 0) {
+    order_list[i].number -= 1;
 
-function delete_item(index) {
-  order_list = order_list.splice(index, 1);
+    if (order_list[i].number == 0) {
+      order_list.splice(i, 1);
+    }
+  }
   open_order_list(order_list);
 }
 
-
-function hide_order_list() {
-  var list = document.getElementsByClassName("cart");
-  for (i = 0; i < list.length; i++) {
-      list[i].style.display = 'none';
-  }
+function resetItem(i) {
+  order_list[i].number = 0;
+  order_list.splice(i, 1);
+  open_order_list(order_list);
 }
 
-function hideCart(elem) {
-  let cartElem = elem.closest(".cart");
-  if (cartElem) {
-      cartElem.style.display = "none";
-  }
+function plus(i) {
+  order_list[i].number += 1;
+  open_order_list(order_list);
 }
+
+// 생성할 장바구니 수 (예: 5)
+generateCarts(numOfCarts);
+
+
+const toast = document.getElementById('toast');  // id가 toast인 요소 div
+ let isToastShown = false;
+ // id가 toastButton인 요소를 클릭하면 아래 함수가 호출됨
+ document.getElementById('pay-btn').addEventListener('click', function () {
+ if (isToastShown) return;   // 토스트 메시지가 띄어져 있다면 함수를 끝냄
+ isToastShown = true;
+ toast.classList.add('show');    // show라는 클래스를 추가해서 토스트 메시지를 띄우는 애니메이션을 발동시킴
+ setTimeout(function () {
+  // 2700ms 후에 show 클래스를 제거함
+  toast.classList.remove('show');
+  isToastShown = false;
+  }, 2700);
+  });

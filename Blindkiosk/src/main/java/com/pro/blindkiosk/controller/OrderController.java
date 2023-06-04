@@ -39,7 +39,7 @@ public class OrderController {
 		}
 		
 		//form
-		@RequestMapping(value="/index", method=RequestMethod.POST)
+		@RequestMapping(value="/api/Order", method=RequestMethod.POST)
 		@Transactional(readOnly=false) //데이터베이스 처리 일관적 실행 - 변경 허용
 		public ModelAndView form( 
 				@ModelAttribute("formModel")Order order, ModelAndView mav) {
@@ -82,7 +82,8 @@ public class OrderController {
 		@Transactional(readOnly=false) //데이터베이스 처리 일관적 실행 - 변경 허용
 		public ModelAndView remove( @RequestParam int code, ModelAndView mav) {
 			//or.delete(order);
-			or.deleteById(code);
+			or.deleteById(code);//선택한 엔터티 ID 삭제
+
 			return new ModelAndView("redirect:/");
 		}
 		
