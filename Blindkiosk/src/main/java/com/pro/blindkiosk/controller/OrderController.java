@@ -39,7 +39,7 @@ public class OrderController {
 		}
 		
 		//form
-		@RequestMapping(value="/api/Order", method=RequestMethod.POST)
+		@RequestMapping(value="/", method=RequestMethod.POST)
 		@Transactional(readOnly=false) //데이터베이스 처리 일관적 실행 - 변경 허용
 		public ModelAndView form( 
 				@ModelAttribute("formModel")Order order, ModelAndView mav) {

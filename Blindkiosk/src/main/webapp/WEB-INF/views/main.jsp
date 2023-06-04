@@ -105,10 +105,12 @@
             <h3>Total Price: 0원</h3>
         </div>
         <div id="order-details-paybtn">
-            <button id="pay-btn" onclick="">결제하기</button>
+            <button id="pay-btn" >결제하기</button>
+            <script src="../js/order.js" defer></script>
         </div>
         <div id="toast">결제되셨습니다!</div>
     </aside>
+    
     <script src="../js/main.js" defer></script>
 </body>
 </html>
